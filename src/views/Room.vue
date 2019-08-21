@@ -20,7 +20,7 @@
                             class="player"
                             v-bind:class="{awaitedPlayer: room.game.currentRound && player.id === room.game.currentRound.awaitedPlayerId}"
                     >
-                        <div class="playerInfo">{{ player.name }}</div>
+                        <div class="playerInfo">{{ player.name }} <span v-if="!player.isOnline">(disconnect)</span></div>
                         <div class="cards">
                             <template v-for="n in player.cardsCount">
                                 <transition-group name="unknownCard" appear="">
@@ -399,6 +399,20 @@
                         }
                         sbPlayer.wins++;
 
+                        break;
+                    // player disconnected
+                    case 1010:
+                        const roomPlayerA = this.room.getPlayerById(commandRes.playerId);
+                        if (roomPlayerA) {
+                            roomPlayerA.isOnline = false;
+                        }
+                        break;
+                    // player connected
+                    case 1011:
+                        const roomPlayerB = this.room.getPlayerById(commandRes.playerId);
+                        if (roomPlayerB) {
+                            roomPlayerB.isOnline = true;
+                        }
                         break;
                 }
             }

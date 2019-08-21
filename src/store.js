@@ -88,6 +88,9 @@ export default new Vuex.Store({
                 case 1006:
                 case 1007:
                 case 1008:
+                case 1009:
+                case 1010:
+                case 1011:
                     console.log('Received message', message);
 
                     state.roomEvent = message;

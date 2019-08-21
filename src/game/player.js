@@ -1,6 +1,7 @@
 export default class Player {
     id = 0;
     name = '';
+    isOnline = true;
     cardsCount = 0;
     cards = [];
 
